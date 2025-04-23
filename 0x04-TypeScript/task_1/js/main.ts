@@ -7,12 +7,45 @@ interface Teacher {
   [key: string]: any;
 }
 
-const teacher3: Teacher = {
+interface Directors extends Teacher {
+  numberOfReports: number;
+}
+
+const director1: Directors = {
   firstName: 'Jabulile',
-  fullTimeEmployee: false,
   lastName: 'Mavundla',
   location: 'Izingolweni',
-  contract: false,
+  fullTimeEmployee: true,
+  numberOfReports: 17,
 };
 
-console.log(teacher3);
+console.log(director1);
+
+// Interface for the constructor of StudentClass
+interface StudentConstructor {
+  new (firstName: string, lastName: string): StudentClassInterface;
+}
+
+// Interface for the StudentClass methods
+interface StudentClassInterface {
+  workOnHomework(): string;
+  displayName(): string;
+}
+
+// StudentClass implementing the interface
+class StudentClass implements StudentClassInterface {
+  constructor(private firstName: string, private lastName: string) {}
+
+  workOnHomework(): string {
+    return 'Currently working';
+  }
+
+  displayName(): string {
+    return this.firstName;
+  }
+}
+
+// Example usage
+const student = new StudentClass('Abuseh', 'Mavundla');
+console.log(student.displayName());       // Output: Abuseh
+console.log(student.workOnHomework());   // Output: Currently working
