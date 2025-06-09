@@ -1,10 +1,11 @@
 process.stdout.write('Welcome to ALX, what is your name?\n');
 
-process.stdin.setEncoding('utf8');
+process.stdin.on('readable', () => {
+  const chunk = process.stdin.read();
 
-process.stdin.on('data', (data) => {
-  const name = data.trim();
-  process.stdout.write(`Your name is: ${name}\n`);
+  if (chunk) {
+    process.stdout.write(`Your name is: ${chunk}`);
+  }
 });
 
 process.stdin.on('end', () => {
